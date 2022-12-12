@@ -20,7 +20,7 @@ jobs:
         COMMITS=`git log --format=%B -n${{ github.event.pull_request.commits }}`
 
         # Ищем в строке [cache clear]
-        if [[ "$COMMITS" == *"[cache clear]"* ]]; then
+        if [[ "$COMMITS" == *"[cache cleor]"* ]]; then
           echo "Нужно очищать!"
         fi
 
