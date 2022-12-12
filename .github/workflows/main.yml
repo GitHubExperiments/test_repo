@@ -15,8 +15,12 @@ jobs:
 
     - name: "Изучаем"
       run: |
-        # https://docs.github.com/en/graphql/reference/objects#pullrequest
-        echo "Число коммитов: ${{ github.event.pull_request.commits }}"
-        echo "Заголовки коммитов: "
-        git log --format=%s -n${{ github.event.pull_request.commits }}
+        # Сохраняем заголовки и описания коммитов в строку
+        # Переменная {{ github.event.pull_request.commits }} содержит число коммитов в PR
+        COMMITS=`git log --format=%B -n${{ github.event.pull_request.commits }}`
+
+        # Ищем в строке [cache clear]
+        if [[ "$COMMITS" == *"[cache clear]"* ]]; then
+          echo "Нужно очищать!"
+        fi
 
