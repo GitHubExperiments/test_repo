@@ -5,8 +5,9 @@ on:
 
 jobs:
   Rabota:
-    name: Stale
+    name: "Работаем"
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/stale@v1
         with:
