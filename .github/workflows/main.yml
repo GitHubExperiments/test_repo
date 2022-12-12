@@ -1,5 +1,5 @@
+name: "Инфо о PR"
 
-name: Stale marker
 on:
   schedule:
     - cron: "0 0 * * *"
