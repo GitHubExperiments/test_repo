@@ -1,12 +1,11 @@
-name: "Инфо о PR"
+name: PR_Info
 
 on:
   pull_request:
 
 jobs:
-
   Rabota:
-    name: "Работаем"
+    name: Rabotaem
     runs-on: ubuntu-latest
 
     steps:
