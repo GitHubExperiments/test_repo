@@ -16,4 +16,4 @@ jobs:
     - name: "Изучаем"
       run: |
         # https://docs.github.com/en/graphql/reference/objects#pullrequest
-        echo "${{ github.event.pull_request.commits }}"
+        echo "Число коммитов: ${{ github.event.pull_request.commits }}"
