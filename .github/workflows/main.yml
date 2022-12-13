@@ -16,13 +16,24 @@ jobs:
 
     - name: "Изучаем"
       run: |
+        # Получаем число коммитов
+        # https://docs.github.com/en/actions/learn-github-actions/contexts#github-context
+        if [[ "${{ github.event_name }}" == "push" ]]
+        then
+          # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#push
+          NUM_COMMITS="${{ github.event.push.commits }}"
+        elif [[ "${{ github.event_name }}" == "pull_request" ]]
+          # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#pull_request
+          NUM_COMMITS="${{ github.event.pull_request.commits }}"
+        else
+          echo "Неизвестный тип события"
+          exit 1
+        fi
+
         # Сохраняем заголовки и описания коммитов в строку
-        # Переменная {{ github.event.sender.commits }} содержит число коммитов
-        # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads
-        COMMITS=`git log --format=%B -n${{ github.event.push.commits }}`
-        
+        COMMITS=`git log --format=%B -n$NUM_COMMITS`
+
         echo "Коммиты: $COMMITS"
-        
 
         # Ищем в строке [cache clear]
         if [[ "$COMMITS" == *"[clear cache]"* ]]; then
