@@ -21,6 +21,13 @@ jobs:
       
       run: |
         echo "ЭТО ПУШ"
+        
+    - name: "Тип push и клеар"
+      if: |
+        github.event_name == 'push' && contains(join(github.event.commits.*.message, ' '), '[clear cache]')
+      
+      run: |
+        echo "ЭТО ПУШ и КЛЕАР"
 
 
       # https://docs.github.com/en/actions/learn-github-actions/expressions
