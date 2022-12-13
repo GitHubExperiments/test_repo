@@ -17,7 +17,7 @@ jobs:
 
     - name: "Изучаем"
       if: |
-        contains(github.event.push.head_commit.message, '[clear cache]')
+        contains(github.event.head_commit.message, '[clear cache]')
 
       run: |
         echo "!!!!Startanulo"
