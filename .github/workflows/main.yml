@@ -17,6 +17,7 @@ jobs:
 
     - name: "Изучаем"
       if: |
+        # https://docs.github.com/en/actions/learn-github-actions/expressions
         contains(join(github.event.commits.*.message, ' '), '[clear cache]')
 
       run: |
