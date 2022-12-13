@@ -17,35 +17,8 @@ jobs:
 
     - name: "Изучаем"
       if: |
-        contains(github.event.push.*.message, '[clear cache]')
+        contains(github.event.push.head_commit.message, '[clear cache]')
 
       run: |
         echo "!!!!Startanulo"
-      
-        # Получаем число коммитов
-        # https://docs.github.com/en/actions/learn-github-actions/contexts#github-context
-        if [[ "${{ github.event_name }}" == "push" ]]
-        then
-          # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#push
-          # https://docs.github.com/en/actions/learn-github-actions/expressions
-          # Не более 20 коммитов
-          COMMITS='${{ join(github.event.commits.*.message, ' ') }}'
-        elif [[ "${{ github.event_name }}" == "pull_request" ]]
-        then
-          # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#pull_request
-          NUM_COMMITS="${{ github.event.pull_request.commits }}"
 
-          # Сохраняем заголовки и описания коммитов в строку
-          COMMITS=`git log --format=%B -n$NUM_COMMITS`
-        else
-          echo "Неизвестный тип события"
-          exit 1
-        fi
-        
-        echo "COMMITS=$COMMITS"
-
-
-        # Ищем в строке [cache clear]
-        if [[ "$COMMITS" == *"[clear cache]"* ]]; then
-          echo "Нужно очищать!"
-        fi
