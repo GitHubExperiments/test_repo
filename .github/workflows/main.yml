@@ -40,10 +40,10 @@ jobs:
           fi
         fi
      
-     - name: "Очищаем кэш"
-       if: github.env.CLEAR_CACHE == "1"
-       run:
-         echo "!!!ОЧИЩАЕМ"
+    - name: "Очищаем кэш"
+      if: github.env.CLEAR_CACHE == "1"
+      run:
+        echo "!!!ОЧИЩАЕМ"
 
      
         
