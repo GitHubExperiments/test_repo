@@ -23,6 +23,7 @@ jobs:
         then
           # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#push
           NUM_COMMITS="${{ github.event.push.commits.length }}"
+          echo "!!!! PUSH ${{ github.event.push.commits.length }}"
         elif [[ "${{ github.event_name }}" == "pull_request" ]]
         then
           # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#pull_request
