@@ -54,11 +54,22 @@ jobs:
             echo "CLEAR_CACHE=1" >> $GITHUB_ENV
           fi
         fi
+        
+    - name: JSON
+      uses: actions/github-script@v6
+      with:
+      script: |
+        const commits = ${{ toJSON(github.event.commits) }}
+        for (const commit of commits)
+        {
+          console.log(commit);
+        }
+
      
     - name: "Очищаем кэш"
       if: env.CLEAR_CACHE == '1'
       run: |
-        echo "!!!ОЧИЩАЕМ"
+        echo "!!!ОЧИЩАЕМ КЭШ"
         echo "${{ env.CLEAR_CACHE }}"
 
 
