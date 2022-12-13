@@ -56,10 +56,10 @@ jobs:
         fi
      
     - name: "Очищаем кэш"
-      if: true #github.env.CLEAR_CACHE == '1'
+      if: env.CLEAR_CACHE == '1'
       run: |
         echo "!!!ОЧИЩАЕМ"
-        echo "${{ github.env.CLEAR_CACHE }}"
+        echo "${{ env.CLEAR_CACHE }}"
 
 
      
