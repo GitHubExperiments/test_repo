@@ -16,7 +16,12 @@ jobs:
       with: { fetch-depth: 0 }
 
     - name: "Изучаем"
+      if: |
+        contains(github.event.push.*.message, '[clear cache')
+
       run: |
+        echo "!!!!Startanulo"
+      
         # Получаем число коммитов
         # https://docs.github.com/en/actions/learn-github-actions/contexts#github-context
         if [[ "${{ github.event_name }}" == "push" ]]
@@ -24,7 +29,7 @@ jobs:
           # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#push
           # https://docs.github.com/en/actions/learn-github-actions/expressions
           # Не более 20 коммитов
-          COMMITS=${{ join(github.event.commits.*.message, ' ') }}
+          COMMITS='${{ join(github.event.commits.*.message, ' ') }}'
         elif [[ "${{ github.event_name }}" == "pull_request" ]]
         then
           # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#pull_request
